@@ -2,10 +2,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_THOUGHT } from '../utils/queries';
+import ReactionList from '../components/ReactionList';
 
 const SingleThought = (props) => {
   const { id: thoughtId } = useParams();
-  console.log(thoughtId);
+  // console.log(thoughtId);
 
   const { loading, data } = useQuery(QUERY_THOUGHT, {
     variables: { id: thoughtId },
@@ -21,14 +22,16 @@ const SingleThought = (props) => {
       <div className='card mb-3'>
         <p className='card-header'>
           <span style={{ fontWeight: 700 }} className='text-light'>
-            Username
+            {thought.username}
           </span>{' '}
-          thought on createdAt
+          thought on {thought.createdAt}
         </p>
         <div className='card-body'>
-          <p>Thought Text</p>
+          <p>{thought.thoughtText}</p>
         </div>
       </div>
+      {/* the reactionCount needs to be greater than zero to prevent rendering if the array is empty */}
+      {thought.reactionCount > 0 && <ReactionList reactions={thought.reactions} />}
     </div>
   );
 };
