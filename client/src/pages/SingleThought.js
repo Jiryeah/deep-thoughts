@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_THOUGHT } from '../utils/queries';
 import ReactionList from '../components/ReactionList';
+import ReactionForm from '../components/ReactionForm';
+import Auth from '../utils/auth';
 
 const SingleThought = (props) => {
   const { id: thoughtId } = useParams();
@@ -32,6 +34,7 @@ const SingleThought = (props) => {
       </div>
       {/* the reactionCount needs to be greater than zero to prevent rendering if the array is empty */}
       {thought.reactionCount > 0 && <ReactionList reactions={thought.reactions} />}
+      {Auth.loggedIn() && <ReactionForm thoughId={thought._id} />}
     </div>
   );
 };
