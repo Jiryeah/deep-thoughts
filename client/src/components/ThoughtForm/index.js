@@ -53,13 +53,14 @@ const ThoughtForm = () => {
       // clear form value
       setText('');
       setCharacterCount(0);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.log(error);
     }
   };
+
   return (
     <div>
-      <p className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}>
+      <p className={`m-0 ${characterCount === 280 ? 'text-error' : ''}`}>
         Character Count: {characterCount}/280
         {error && <span className='ml-2'>Something went wrong...</span>}
       </p>
