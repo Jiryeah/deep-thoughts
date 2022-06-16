@@ -23,7 +23,6 @@ const ThoughtForm = () => {
       try {
         // update me object's cache, appending new thought to the end of the array
         const { me } = cache.readQuery({ query: QUERY_ME });
-        // console.log(me);
         cache.writeQuery({
           query: QUERY_ME,
           data: { me: { ...me, thoughts: [...me.thoughts, addThought] } },
